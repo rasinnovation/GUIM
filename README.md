@@ -24,7 +24,10 @@ setup.
 ## JavaFX
 Download package to desired location. Good idea to keep all
 libs/packages in one directory on computer to be tidy.
-https://gluonhq.com/products/javafx/ <br /><br />
+https://gluonhq.com/products/javafx/ <br /><br /> May have to 
+check File > Project Structure >. Under Project, verify proper
+SDK since cloning project may
+cause issues with the project SDK.
 ### Verify Path variable
 Set environment variable in IDE (if not done so already):
 - File > Settings > Under Appearance and Behavior, Choose Path Variables
@@ -78,7 +81,10 @@ And that is it in order to get java to communicate with
 local database.
 
 ### Optional Database console setup
-You can manipulate the database file without running
+The following may already implemented when the
+project is cloned since some project setting may
+have been set.
+<br /><br />You can manipulate the database file without running
 the java code. To set up: Right click the DB file in the 
 IDE and choose new > add datasource from selection (May be
 towards the bottom of selection). Then choose sqlite from the 

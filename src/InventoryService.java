@@ -38,7 +38,7 @@ public class InventoryService {
         String SQL_updateItem = "UPDATE "
                 + DatabaseInfo.Tables.INVENTORY + " SET "
                 + "ID = " + item.getITEM_ID() + ", "
-                + "TEXT = " + item.getName() + ", "
+                + "NAME = " + item.getName() + ", "
                 + "NOTES = " + item.getNotes() + ", "
                 + "QUANTITY = " + item.getQuantity() + ", "
                 + "EXPIRATION = " + item.getExpiration() + ", "
