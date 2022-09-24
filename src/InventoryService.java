@@ -1,4 +1,6 @@
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryService {
 
@@ -109,5 +111,33 @@ public class InventoryService {
         }
 
         return inventory;
+    }
+
+    public List<Inventory> getAllItems() {
+        List<Inventory> inventoryItems = new ArrayList<>();
+
+        String SQL_loadAllItems = "SELECT * FROM "
+                + DatabaseInfo.Tables.INVENTORY + ";";
+
+        try (
+                Connection connection = DriverManager.getConnection(DatabaseInfo.DB_URL);
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery(SQL_loadAllItems)
+        ) {
+            while (results.next()) {
+                inventoryItems.add(new Inventory(
+                        results.getInt(1),
+                        results.getString(2),
+                        results.getString(3),
+                        results.getInt(4),
+                        results.getString(5),
+                        results.getString(6)
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("There was an error retrieving data from database");
+        }
+
+        return inventoryItems;
     }
 }

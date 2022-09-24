@@ -8,8 +8,7 @@ import java.sql.Statement;
 
 /*
     Placeholder for the Javafx main file
-    This File is only meant to test my end in the mean time,
-    O
+    This File is only meant to test my end in the meantime,
     Will scrap it once the gui is implemented
  */
 public class TEST_MAIN extends Application {
