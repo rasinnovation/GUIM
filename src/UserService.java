@@ -2,6 +2,21 @@ import java.sql.*;
 import java.util.UUID;
 
 public class UserService {
+    public static boolean verifyLogin(String username, String password) {
+        boolean isUserValid = false;
+        User user = getUserByUsername(username);
+
+        if (user == null) {
+            return false;
+        }
+
+        if (user.getUsername().equals(username)
+                && user.getPassword().equals(password)) {
+            isUserValid = true;
+        }
+
+        return  isUserValid;
+    }
     public static void createUser(User user, String table) {
 
         String SQL_insertUser = "INSERT INTO "
@@ -12,6 +27,8 @@ public class UserService {
                 + "\", \"" +
                 user.getPassword() +
                 "\");";
+
+        System.out.println(SQL_insertUser);
 
         try (
                 Connection connection = DriverManager.getConnection(DatabaseInfo.DB_URL);

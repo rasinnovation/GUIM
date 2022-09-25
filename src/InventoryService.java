@@ -29,13 +29,6 @@ public class InventoryService {
         }
     }
 
-    // TODO update inventory. FIX BUG
-    /*
-        statement to update
-        UPDATE table_name
-        SET column1 = value1, column2 = value2, ...
-        WHERE condition;      (Example WHERE ID = 1;)
-     */
     public void updateInventoryItem(Inventory item, int quantity) {
         String SQL_updateItem = "UPDATE "
                 + DatabaseInfo.Tables.INVENTORY + " SET "
@@ -54,11 +47,6 @@ public class InventoryService {
         }
     }
 
-    // TODO remove inventory
-    /*
-        DELETE FROM table_name
-        WHERE condition;  (Example WHERE ID = 1;)
-     */
     public void removeInventoryItem(Inventory item) {
         String SQL_removeItem = "DELETE FROM "
                 + DatabaseInfo.Tables.INVENTORY
@@ -76,8 +64,6 @@ public class InventoryService {
         }
     }
 
-    // On this return check to see if the result is NULL
-    // If null, the item was never found.
     public Inventory getItemByName(String name) {
         String SQL_getItemByName = "SELECT * FROM "
                 + DatabaseInfo.Tables.INVENTORY
@@ -108,8 +94,6 @@ public class InventoryService {
         return inventory;
     }
 
-    // On this return check to see if the result is NULL
-    // If null, the item was never found.
     public Inventory getItemByID(int ID) {
         String SQL_getItemByID = "SELECT * FROM "
                 + DatabaseInfo.Tables.INVENTORY

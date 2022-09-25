@@ -9,10 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import jdk.jfr.Category;
-
 import java.net.URL;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -57,6 +54,8 @@ public class PrimaryController implements Initializable {
     private TableColumn<Inventory, String> category;
     @javafx.fxml.FXML
     private TableView<Inventory> tableView;
+    @javafx.fxml.FXML
+    private Label loggedInLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,15 +70,16 @@ public class PrimaryController implements Initializable {
         expiration.setCellValueFactory(new PropertyValueFactory<Inventory, String>("expiration"));
         category.setCellValueFactory(new PropertyValueFactory<Inventory, String>("category"));
 
+        loggedInLabel.setText("Logged in: " + UserService.getLoggedInUser().getUsername());
+
         displayTableView();
+        Notification.checkStock();
 
     }
 
     public void displayTableView() {
         tableView.getItems().clear();
         tableView.setItems(getInventory());
-
-
     }
 
     public ObservableList<Inventory> getInventory() {
@@ -93,12 +93,9 @@ public class PrimaryController implements Initializable {
     }
 
     public void checkForNotifications() {
-        List<Inventory> outOfStockItems = Notification.getOutOfStockItems();
-
-        if (!outOfStockItems.isEmpty()) {
-
-        }
+        Notification.checkStock();
     }
+
     @javafx.fxml.FXML
     public void fileSave(ActionEvent actionEvent) {
         //call to save database
@@ -227,14 +224,8 @@ public class PrimaryController implements Initializable {
 
         Inventory inventory = inventoryService.getItemByID(ID);
 
-        // DEBUG
-        if (inventory == null) {
-            System.out.println("Inventory is null for removing");
-        }
-
         if (inventory != null) {
             inventoryService.removeInventoryItem(inventory);
-            System.out.println("Inventory not null");
             displayTableView();
             System.out.println(inventory.getITEM_ID() + " " + inventory.getQuantity());
         } else {

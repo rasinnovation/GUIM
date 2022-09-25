@@ -1,3 +1,5 @@
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -7,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Notification {
+    public static void checkStock() {
+        List<Inventory> inventories = getOutOfStockItems();
+        if (!getOutOfStockItems().isEmpty()) {
+            displayOutofStockAlert(inventories);
+        }
+    }
 
     public static List<Inventory> getOutOfStockItems() {
         List<Inventory> outOfStockItems = new ArrayList<>();
@@ -44,7 +52,7 @@ public class Notification {
         window.setTitle("Out of Stock Alert!");
         window.setMinWidth(250);
 
-        Label label;
+        Label label = null;
 
         for (Inventory inventory : items) {
             label = new Label();
@@ -57,5 +65,11 @@ public class Notification {
         Button closeButton = new Button("Close");
         closeButton.setOnAction(e -> window.close());
         VBox layout = new VBox(10);
+        layout.getChildren().addAll(label, closeButton);
+        layout.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(layout);
+        window.setScene(scene);
+        window.showAndWait();
     }
 }

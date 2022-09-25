@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="LoginController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
+   <left>
+      <VBox alignment="CENTER" prefHeight="800.0" prefWidth="402.0" spacing="5.0" style="-fx-background-color: #0096FF#0096FF;" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="General Use" textFill="#f5efe6">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Line endX="100.0" startX="-101.77664184570312" startY="1.5497207641601562E-6" stroke="#f5efe6" strokeWidth="2.0" />
+            <Label text="Inventory Manager" textFill="#f5efe6">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="400.0" prefWidth="389.0" style="-fx-background-color: #F5EFE6;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="187.0" prefWidth="878.0">
+               <children>
+                  <Label text="Secure login">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="48.0" prefWidth="381.0" />
+            <HBox alignment="TOP_CENTER" prefHeight="49.0" prefWidth="381.0" spacing="15.0">
+               <children>
+                  <Label text="Username">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameTextField" />
+               </children>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="55.0" prefWidth="381.0" spacing="15.0">
+               <children>
+                  <Label text="Password">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="passwordField" />
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="325.0" prefWidth="878.0" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#loginButtonPressed" prefWidth="200.0" style="-fx-background-color: #0096FF#0096FF;" text="Login" textFill="#f5efe6" />
+                  <Button mnemonicParsing="false" onAction="#createAccountButtonPressed" prefWidth="200.0" style="-fx-background-color: #0096FF#0096FF;" text="Create Account" textFill="#f5efe6" />
+                  <Button mnemonicParsing="false" onAction="#exitButtonPressed" prefWidth="200.0" style="-fx-background-color: #0096FF#0096FF;" text="Exit" textFill="#f5efe6" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
