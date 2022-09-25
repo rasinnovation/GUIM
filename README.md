@@ -13,9 +13,6 @@ listeners within the to be built gui.
 database used is SQLite. This choice allows for local
 use without the need for servers. 
 
-## Royalty-Free Attribution
-<a href="https://www.freepik.com/free-vector/electric-ball-lightning-circle-strike-impact-place_5901337.htm#page=2&query=commercial%20use&position=26&from_view=keyword">Image by vectorpocket</a> on Freepik
-
 ## IDE
 
 The IDE used was intelliJ. Since paths and set up tend 
