@@ -12,7 +12,7 @@ public class InventoryService {
                 + "\"" + item.getNotes() + "\", "
                 + "\"" + item.getQuantity() + "\", "
                 + "\"" + item.getExpiration() + "\", "
-                + item.getCategory() + ");";
+                + "\"" + item.getCategory() + "\");";
 
 
         try (
@@ -29,23 +29,18 @@ public class InventoryService {
         }
     }
 
-    // TODO update inventory
+    // TODO update inventory. FIX BUG
     /*
         statement to update
         UPDATE table_name
         SET column1 = value1, column2 = value2, ...
         WHERE condition;      (Example WHERE ID = 1;)
      */
-    public void updateInventoryItem(Inventory item) {
+    public void updateInventoryItem(Inventory item, int quantity) {
         String SQL_updateItem = "UPDATE "
                 + DatabaseInfo.Tables.INVENTORY + " SET "
-                + "ID = " + item.getITEM_ID() + ", "
-                + "NAME = " + item.getName() + ", "
-                + "NOTES = " + item.getNotes() + ", "
-                + "QUANTITY = " + item.getQuantity() + ", "
-                + "EXPIRATION = " + item.getExpiration() + ", "
-                + "CATEGORY = " + item.getCategory() + " "
-                + "WHERE ID = " + item.getITEM_ID() + ";";
+                + "QUANTITY = " + quantity
+                + " WHERE ID = " + item.getITEM_ID() + ";";
 
         try (
                 Connection connection = DriverManager.getConnection(DatabaseInfo.DB_URL);
@@ -85,8 +80,8 @@ public class InventoryService {
     // If null, the item was never found.
     public Inventory getItemByName(String name) {
         String SQL_getItemByName = "SELECT * FROM "
-                + DatabaseInfo.Tables.INVENTORY + " "
-                + "WHERE NAME = \"" + name + "\";";
+                + DatabaseInfo.Tables.INVENTORY
+                + " WHERE NAME = \"" + name + "\";";
 
         Inventory inventory = null;
 
@@ -94,6 +89,38 @@ public class InventoryService {
                 Connection connection = DriverManager.getConnection(DatabaseInfo.DB_URL);
                 Statement statement = connection.createStatement();
                 ResultSet results = statement.executeQuery(SQL_getItemByName)
+        ) {
+            if (results.next()) {
+                inventory = new Inventory(
+                        results.getInt(1),
+                        results.getString(2),
+                        results.getString(3),
+                        results.getInt(4),
+                        results.getString(5),
+                        results.getString(6)
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println("Something went wrong finding the inventory in " +
+                    "the database.");
+        }
+
+        return inventory;
+    }
+
+    // On this return check to see if the result is NULL
+    // If null, the item was never found.
+    public Inventory getItemByID(int ID) {
+        String SQL_getItemByID = "SELECT * FROM "
+                + DatabaseInfo.Tables.INVENTORY
+                + " WHERE ID = " + ID + ";";
+
+        Inventory inventory = null;
+
+        try (
+                Connection connection = DriverManager.getConnection(DatabaseInfo.DB_URL);
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery(SQL_getItemByID)
         ) {
             if (results.next()) {
                 inventory = new Inventory(
@@ -139,5 +166,26 @@ public class InventoryService {
         }
 
         return inventoryItems;
+    }
+
+    public static int getMaxID() {
+        String SQL_maxID = "SELECT MAX(ID) FROM " +
+                DatabaseInfo.Tables.INVENTORY + ";";
+
+        int maxID = 0;
+
+        try (
+                Connection connection = DriverManager.getConnection(DatabaseInfo.DB_URL);
+                Statement statement = connection.createStatement();
+                ResultSet results = statement.executeQuery(SQL_maxID)
+        ) {
+            if (results.next()) {
+                maxID = results.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println("There was an error retrieving data from database");
+        }
+
+        return maxID;
     }
 }

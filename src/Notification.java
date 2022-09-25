@@ -1,3 +1,7 @@
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.scene.control.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,5 +35,27 @@ public class Notification {
         }
 
         return outOfStockItems;
+    }
+
+    public static void displayOutofStockAlert(List<Inventory> items) {
+        Stage window = new Stage();
+
+        window.initModality(Modality.APPLICATION_MODAL);
+        window.setTitle("Out of Stock Alert!");
+        window.setMinWidth(250);
+
+        Label label;
+
+        for (Inventory inventory : items) {
+            label = new Label();
+            label.setText("ID: " + inventory.getITEM_ID()
+                    + " " + inventory.getName()
+                    + " is out of stock"
+            );
+        }
+
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(e -> window.close());
+        VBox layout = new VBox(10);
     }
 }

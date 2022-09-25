@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PrimaryController">
+    <children>
+        <Pane prefHeight="4.0" prefWidth="1280.0" />
+        <HBox prefHeight="43.0" prefWidth="1280.0">
+            <children>
+                <Pane prefHeight="25.0" prefWidth="11.0" />
+                <MenuButton fx:id="FileButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem fx:id="MI_FileN" mnemonicParsing="false" onAction="#fileNew" text="New" />
+                        <MenuItem fx:id="MI_FileS" mnemonicParsing="false" onAction="#fileSave" text="Save" />
+                        <MenuItem fx:id="MI_FileSA" mnemonicParsing="false" onAction="#fileSaveAs" text="Save As" />
+                    </items>
+                </MenuButton>
+            </children>
+        </HBox>
+        <HBox prefHeight="69.0" prefWidth="1280.0">
+            <children>
+                <Pane prefHeight="63.0" prefWidth="51.0" />
+                <MenuButton fx:id="AddButton" alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="38.0" prefWidth="105.0" text="Add">
+                    <items>
+                        <MenuItem fx:id="MI_AddItem" mnemonicParsing="false" onAction="#addItemMenu" text="Add Items" />
+                        <MenuItem fx:id="MI_AddNotify" mnemonicParsing="false" onAction="#addNotifyMenu" text="Add Notification" />
+                    </items>
+                </MenuButton>
+                <Pane prefHeight="63.0" prefWidth="63.0" />
+                <MenuButton fx:id="UpdateButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="108.0" text="Update">
+                    <items>
+                        <MenuItem fx:id="MI_RemoveItem" mnemonicParsing="false" onAction="#removeItemMenu" text="Remove Item" />
+                  <MenuItem fx:id="MI_UpdateItem" mnemonicParsing="false" onAction="#updateItemMenu" text="Update Item" />
+                    </items>
+                </MenuButton>
+            </children></HBox>
+        <HBox prefHeight="668.0" prefWidth="1280.0">
+            <children>
+                <VBox prefHeight="668.0" prefWidth="118.0" />
+                <VBox prefHeight="761.0" prefWidth="1049.0">
+               <children>
+                  <TableView fx:id="tableView" prefHeight="670.0" prefWidth="1049.0">
+                    <columns>
+                      <TableColumn fx:id="id" prefWidth="90.0" text="ID" />
+                      <TableColumn fx:id="name" prefWidth="218.0" text="Name" />
+                        <TableColumn fx:id="notes" minWidth="0.0" prefWidth="219.0" text="Notes" />
+                        <TableColumn fx:id="quantity" prefWidth="135.0" text="Quantity" />
+                        <TableColumn fx:id="expiration" prefWidth="186.0" text="Expiration" />
+                        <TableColumn fx:id="category" prefWidth="200.0" text="Category" />
+                    </columns>
+                  </TableView>
+               </children>
+                </VBox>
+            </children></HBox>
+    </children>
+</VBox>
